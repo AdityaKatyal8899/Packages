@@ -32,7 +32,7 @@ It is designed to be simple, predictable, and reusable across projects such as:
 
 ---
 
-##Code example: 
+## Code example: 
 
 from mediainfo import VideoInfo
 
@@ -45,6 +45,7 @@ print(data.get_codec())
 print(data.get_video_stream())
 print(data.get_fps())
 
+---
 
 ## Installation
 
