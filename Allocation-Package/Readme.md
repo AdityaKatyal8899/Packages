@@ -301,6 +301,65 @@ Central engine that enforces all locking, booking, cancellation, and cleanup rul
 
 ---
 
+## Code Example
+
+```bash
+
+#Base Case
+
+from seatlock import SeatManager, Seat
+
+# Create seats
+seats = [Seat(i) for i in range(1, 6)]
+
+# Initialize manager with custom timeout (in seconds)
+manager = SeatManager(seats, lock_timeout=60)
+
+# Lock a seat
+print(manager.lock_seat(1, "user1"))
+
+# Book the seat
+print(manager.book_a_seat(1, "user1"))
+
+#Bulk Use Case
+
+from seatlock import SeatManager, Seat
+
+seats = [Seat(i) for i in range(1, 6)]
+manager = SeatManager(seats, lock_timeout=120)
+
+# Lock multiple seats
+print(manager.lock_seats_bulk([2, 3], "user2"))
+
+# Book them
+print(manager.book_seats_bulk([2, 3], "user2"))
+
+
+#Handling Conflicts
+
+# Another user tries to book without lock
+print(manager.book_a_seat(4, "user3"))
+# → Seat 4 is not locked
+
+# Lock by one user
+manager.lock_seat(4, "user1")
+
+# Another user tries to lock same seat
+print(manager.lock_seat(4, "user2"))
+# → Seat 4 is currently locked by user1
+
+```
+
+## Update
+
+In seatock v0.2.0, a new parameter has been added called lock_timeout. You can now provide the time out for a lock. 
+This timeout will have base unit in seconds.
+
+## Previous Version
+
+In seatlock v0.1.0, lock_timeout was present but was set to 10 during developement and was constant and hence was creating a problem.
+The bug is now fixed with proper parameter availibility. 
+
 ## Notes on Usage
 
 - All methods are **thread-safe**

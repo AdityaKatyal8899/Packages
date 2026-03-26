@@ -3,12 +3,10 @@ from .states import AVAILABLE, BOOKED, LOCKED
 
 
 class SeatManager:
-    LOCK_TIMEOUT = 10  # seconds
-
-    def __init__(self, seats):
+    def __init__(self, seats, lock_timeout=30):
         self.seats = {seat.seat_id: seat for seat in seats}
         self.global_lock = threading.Lock()
-
+        self.lock_timeout = lock_timeout
 
     def cleanup_expired_locks(self):
         with self.global_lock:
@@ -16,7 +14,7 @@ class SeatManager:
 
             for seat in self.seats.values():
                 if seat.is_locked():
-                    if now - seat.lock_time > self.LOCK_TIMEOUT:
+                    if now - seat.lock_time > self.lock_timeout:
                         self._release_lock(seat)
 
 
@@ -29,7 +27,7 @@ class SeatManager:
 
             # Expire old lock if timeout passed
             if seat.is_locked():
-                if time.time() - seat.lock_time > self.LOCK_TIMEOUT:
+                if time.time() - seat.lock_time > self.lock_timeout:
                     self._release_lock(seat)
 
             if seat.is_booked():
@@ -167,9 +165,6 @@ class SeatManager:
                 self._release_lock(seat)
 
             return f"Locks for seats {seat_ids} cancelled by {user_id}"
-
-
-
 
     def _release_lock(self, seat):
         seat.status = AVAILABLE
