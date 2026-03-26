@@ -32,8 +32,16 @@ It is designed to be simple, predictable, and reusable across projects such as:
 
 ---
 
+
+## Installation
+
+Install from PyPI using pip:
+
+---
+
 ## Code example: 
 
+```bash
 from mediainfo import VideoInfo
 
 data = VideoInfo("example.mp4")
@@ -46,10 +54,6 @@ print(data.get_video_stream())
 print(data.get_fps())
 
 ---
-
-## Installation
-
-Install from PyPI using pip:
 
 ```bash
 pip install mediainfo-py
