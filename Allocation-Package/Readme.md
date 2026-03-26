@@ -346,7 +346,7 @@ manager.lock_seat(4, "user1")
 
 # Another user tries to lock same seat
 print(manager.lock_seat(4, "user2"))
-# → Seat 4 is currently locked by user1
+# → Seat 4 is currently locked by user1 
 
 ```
 
