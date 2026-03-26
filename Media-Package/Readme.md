@@ -32,9 +32,24 @@ It is designed to be simple, predictable, and reusable across projects such as:
 
 ---
 
+##Code example: 
+
+from mediainfo import VideoInfo
+
+data = VideoInfo("example.mp4")
+
+print(data.get_resolution())
+print(data.get_audio_stream())
+print(data.get_duration())
+print(data.get_codec())
+print(data.get_video_stream())
+print(data.get_fps())
+
+
 ## Installation
 
 Install from PyPI using pip:
 
 ```bash
 pip install mediainfo-py
+
