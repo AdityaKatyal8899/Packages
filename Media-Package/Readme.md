@@ -37,6 +37,10 @@ It is designed to be simple, predictable, and reusable across projects such as:
 
 Install from PyPI using pip:
 
+
+```bash
+pip install mediainfo-py
+```
 ---
 
 ## Code example: 
@@ -52,9 +56,4 @@ print(data.get_duration())
 print(data.get_codec())
 print(data.get_video_stream())
 print(data.get_fps())
-
----
-
-```bash
-pip install mediainfo-py
 
